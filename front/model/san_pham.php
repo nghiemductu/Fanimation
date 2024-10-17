@@ -1,13 +1,11 @@
 <?php
-    function get_new_arrivals($limit = 4) {
+    require_once __DIR__ . '/../../database/connect_db.php';
+    function get_new_arrivals() {
         $conn = connect_db();
-        $sql = "SELECT * FROM products WHERE hien_thi_sp = 1 ORDER BY id DESC LIMIT :limit";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt = $conn->prepare("SELECT * FROM products WHERE new_arrival = 1 AND hien_thi_sp = 1");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
     function get_featured_products() {
         $conn = connect_db();
         $stmt = $conn->prepare("SELECT * FROM products WHERE featured = 1 AND hien_thi_sp = 1");
@@ -22,11 +20,43 @@
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    function get_product($id) {
+    function get_product($product_id) {
         $conn = connect_db();
-        $stmt = $conn->prepare("SELECT * FROM products WHERE id = :id AND hien_thi_sp = 1");
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $sql = "SELECT * FROM products WHERE id = :product_id"; // Truy vấn để lấy sản phẩm theo ID
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetch(PDO::FETCH_ASSOC); // Trả về thông tin sản phẩm
+    }
+    function get_products_by_category($category_id, $offset, $limit, $order_by) {
+        $conn = connect_db();
+        $sql = "SELECT * FROM products WHERE id_danh_muc = :category_id AND hien_thi_sp = 1 ORDER BY gia $order_by LIMIT :offset, :limit";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':category_id', $category_id, PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function search_products($query) {
+        $conn = connect_db();
+        $sql = "SELECT * FROM products WHERE ten_sp LIKE :query AND hien_thi_sp = 1"; // Tìm kiếm sản phẩm
+        $stmt = $conn->prepare($sql);
+        $searchTerm = '%' . $query . '%'; // Thêm ký tự % để tìm kiếm
+        $stmt->bindParam(':query', $searchTerm, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả về danh sách sản phẩm
+    }
+
+    function get_similar_products($category_id, $current_product_id, $limit = 8) {
+        $conn = connect_db();
+        $sql = "SELECT * FROM products WHERE id_danh_muc = :category_id AND id != :current_product_id AND hien_thi_sp = 1 LIMIT :limit";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':category_id', $category_id, PDO::PARAM_INT);
+        $stmt->bindParam(':current_product_id', $current_product_id, PDO::PARAM_INT);
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     ?>

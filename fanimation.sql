@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 02, 2024 lúc 07:49 AM
--- Phiên bản máy phục vụ: 10.4.32-MariaDB
--- Phiên bản PHP: 8.2.12
+-- Host: 127.0.0.1
+-- Generation Time: Oct 16, 2024 at 06:02 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `fanimation`
+-- Database: `fanimation`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `category`
+-- Table structure for table `category`
 --
 
 CREATE TABLE `category` (
@@ -35,15 +35,11 @@ CREATE TABLE `category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `category`
---
-
-
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `chi_tiet_orders`
+-- Table structure for table `chi_tiet_orders`
 --
 
 CREATE TABLE `chi_tiet_orders` (
@@ -51,26 +47,32 @@ CREATE TABLE `chi_tiet_orders` (
   `order_id` int(11) NOT NULL,
   `id_sp` int(11) NOT NULL,
   `so_luong` int(11) NOT NULL,
-  `gia` decimal(9,0) NOT NULL
+  `gia` decimal(10,2) NOT NULL,
+  `tong_gia_tam_thoi` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Cấu trúc bảng cho bảng `orders`
+--
+--
+-- Table structure for table `orders`
 --
 
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `id_khach_hang` int(11) NOT NULL,
-  `ngay_dat` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `tong_gia` decimal(9,0) NOT NULL
+  `ngay_dat` timestamp NOT NULL DEFAULT current_timestamp(),
+  `tong_gia` decimal(10,2) NOT NULL,
+  `ten_nguoi_nhan` varchar(20) NOT NULL,
+  `so_dien_thoai` varchar(12) NOT NULL,
+  `dia_chi` varchar(50) NOT NULL,
+  `expiry_date` date DEFAULT NULL,
+  `status` varchar(20) DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
+--
 
 --
--- Cấu trúc bảng cho bảng `products`
+-- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
@@ -88,38 +90,40 @@ CREATE TABLE `products` (
   `chuc_nang` varchar(50) NOT NULL,
   `so_canh` varchar(50) NOT NULL,
   `toc_do` varchar(50) NOT NULL,
-  `ngay_dang` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `ngay_dang` timestamp NOT NULL DEFAULT current_timestamp(),
   `new_arrival` tinyint(1) DEFAULT 0,
   `featured` tinyint(1) DEFAULT 0,
   `best_seller` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `products`
---
-
-
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `review`
+-- Table structure for table `review`
 --
 
 CREATE TABLE `review` (
   `id` int(11) NOT NULL,
   `danh_gia` int(11) NOT NULL,
   `binh_luan` text NOT NULL,
-  `ngay_bl` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `ngay_bl` timestamp NOT NULL DEFAULT current_timestamp(),
   `hien_thi_bl` tinyint(4) NOT NULL DEFAULT 1,
   `id_san_pham` int(10) NOT NULL,
   `id_khach_hang` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `review`
+--
+
+
+
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -127,28 +131,28 @@ CREATE TABLE `user` (
   `user_name` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(50) DEFAULT NULL,
-  `role` tinyint(4) NOT NULL DEFAULT 1,
+  `role` tinyint(4) NOT NULL DEFAULT 0,
   `hien_thi_user` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `user`
+-- Dumping data for table `user`
 --
 
 
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `category`
+-- Indexes for table `category`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `chi_tiet_orders`
+-- Indexes for table `chi_tiet_orders`
 --
 ALTER TABLE `chi_tiet_orders`
   ADD PRIMARY KEY (`id`),
@@ -156,102 +160,102 @@ ALTER TABLE `chi_tiet_orders`
   ADD KEY `id_sp` (`id_sp`);
 
 --
--- Chỉ mục cho bảng `orders`
+-- Indexes for table `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_khach_hang` (`id_khach_hang`);
 
 --
--- Chỉ mục cho bảng `products`
+-- Indexes for table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_danh_muc` (`id_danh_muc`);
 
 --
--- Chỉ mục cho bảng `review`
+-- Indexes for table `review`
 --
 ALTER TABLE `review`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_review_products` (`id_san_pham`),
-  ADD KEY `fk_review_users` (`id_khach_hang`);
+  ADD KEY `id_san_pham` (`id_san_pham`),
+  ADD KEY `id_khach_hang` (`id_khach_hang`);
 
 --
--- Chỉ mục cho bảng `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `category`
+-- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `chi_tiet_orders`
+-- AUTO_INCREMENT for table `chi_tiet_orders`
 --
 ALTER TABLE `chi_tiet_orders`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `orders`
+-- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `products`
+-- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `review`
+-- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Các ràng buộc cho các bảng đã đổ
+-- Constraints for dumped tables
 --
 
 --
--- Các ràng buộc cho bảng `chi_tiet_orders`
+-- Constraints for table `chi_tiet_orders`
 --
 ALTER TABLE `chi_tiet_orders`
   ADD CONSTRAINT `chi_tiet_orders_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
   ADD CONSTRAINT `chi_tiet_orders_ibfk_2` FOREIGN KEY (`id_sp`) REFERENCES `products` (`id`);
 
 --
--- Các ràng buộc cho bảng `orders`
+-- Constraints for table `orders`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`id_khach_hang`) REFERENCES `user` (`id`);
 
 --
--- Các ràng buộc cho bảng `products`
+-- Constraints for table `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`id_danh_muc`) REFERENCES `category` (`id`);
 
 --
--- Các ràng buộc cho bảng `review`
+-- Constraints for table `review`
 --
 ALTER TABLE `review`
-  ADD CONSTRAINT `fk_review_products` FOREIGN KEY (`id_san_pham`) REFERENCES `products` (`id`),
-  ADD CONSTRAINT `fk_review_users` FOREIGN KEY (`id_khach_hang`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `review_ibfk_1` FOREIGN KEY (`id_san_pham`) REFERENCES `products` (`id`),
+  ADD CONSTRAINT `review_ibfk_2` FOREIGN KEY (`id_khach_hang`) REFERENCES `user` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,9 +1,9 @@
 <div class="container-fluid flex-grow-1 pt-4">
-    <h1 class="mb-4 text-center">Quản lý sản phẩm</h1>
+    <h1 class="mb-4 text-center">Product management</h1>
 
     <?php if (isset($_SESSION['success'])): ?>
         <script>
-            showSuccessAlert("Thành công!", "<?php echo $_SESSION['success']; ?>");
+            showSuccessAlert("Success!", "<?php echo $_SESSION['success']; ?>");
         </script>
         <?php unset($_SESSION['success']); ?>
     <?php endif; ?>
@@ -13,17 +13,17 @@
             <div class="col-md-8">
                 <div class="row">
                     <div class="col-md-3 mb-3">
-                        <input type="text" class="form-control" id="ten_sp" name="ten_sp" placeholder="Nhập tên sản phẩm" required>
+                        <input type="text" class="form-control" id="ten_sp" name="ten_sp" placeholder="Enter the product name" required>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <input type="number" class="form-control" id="gia" name="gia" placeholder="Nhập giá sản phẩm" required>
+                        <input type="number" class="form-control" id="gia" name="gia" placeholder="Enter product price" required>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <input type="number" class="form-control" id="so_luong_hang" name="so_luong_hang" placeholder="Nhập số lượng" required>
+                        <input type="number" class="form-control" id="so_luong_hang" name="so_luong_hang" placeholder="Enter quantity" required>
                     </div>
                     <div class="col-md-3 mb-3">
                         <select class="form-control" id="id_dm" name="id_dm" required>
-                            <option value="">Chọn danh mục</option>
+                            <option value="">Select category</option>
                             <?php foreach ($dsdm as $dm): ?>
                                 <option value="<?php echo $dm['id']; ?>"><?php echo $dm['ten_danh_muc']; ?></option>
                             <?php endforeach; ?>
@@ -32,33 +32,33 @@
                 </div>
                 <div class="row">
                     <div class="col-md-3 mb-3">
-                        <input type="text" class="form-control" id="cong_suat" name="cong_suat" placeholder="Nhập công suất">
+                        <input type="text" class="form-control" id="cong_suat" name="cong_suat" placeholder="Enter capacity" required>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <input type="text" class="form-control" id="cong_nghe" name="cong_nghe" placeholder="Nhập công nghệ">
+                        <input type="text" class="form-control" id="cong_nghe" name="cong_nghe" placeholder="Enter technology" required>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <input type="text" class="form-control" id="chat_lieu" name="chat_lieu" placeholder="Nhập chất liệu">
+                        <input type="text" class="form-control" id="chat_lieu" name="chat_lieu" placeholder="Enter material" required>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <input type="text" class="form-control" id="chuc_nang" name="chuc_nang" placeholder="Nhập chức năng">
+                        <input type="text" class="form-control" id="chuc_nang" name="chuc_nang" placeholder="Enter function" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-3 mb-3">
-                        <input type="text" class="form-control" id="so_canh" name="so_canh" placeholder="Nhập số cánh">
+                        <input type="text" class="form-control" id="so_canh" name="so_canh" placeholder="Enter wing number" required>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <input type="text" class="form-control" id="toc_do" name="toc_do" placeholder="Nhập tốc độ">
+                        <input type="text" class="form-control" id="toc_do" name="toc_do" placeholder="Enter speed" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <input type="file" class="form-control" id="imgs" name="imgs[]" multiple required accept="image/*">
-                        <small class="form-text text-muted">Chọn tối đa 6 ảnh (jpg, jpeg, png, gif)</small>
+                        <small class="form-text text-muted">Choose up to 6 photos (jpg, jpeg, png, gif)</small>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12 mb-3">
-                        <textarea class="form-control" id="mo_ta_sp" name="mo_ta_sp" rows="5" placeholder="Nhập mô tả sản phẩm"></textarea>
+                        <textarea class="form-control" id="mo_ta_sp" name="mo_ta_sp" rows="5" placeholder="Enter product description" required></textarea>
                     </div>
                 </div>
                 <div class="text-center mb-3">
@@ -67,31 +67,32 @@
                     <label class="me-5"><input type="checkbox" name="best_seller" value="1"> Best Sellers</label>
                 </div>
                 <div class="text-center mb-3">
-                    <button type="submit" name="add_new" class="btn btn-primary">Thêm mới</button>
+                    <button type="submit" name="add_new" class="btn btn-primary">Add new</button>
                 </div>
             </div>
         </div>
     </form>
 
-    <table class="table table-striped">
+     <table class="table table-striped">
         <thead>
             <tr class="text-center">
-                <th>STT</th>
-                <th>Tên sản phẩm</th>
-                <th>Hình ảnh</th>
-                <th>Danh mục</th>
-                <th>Giá</th>
-                <th>Số lượng</th>
-                <th>Mô tả</th>
-                <th>Thông số kỹ thuật</th>
-                <th>Ngày đăng</th>
-                <th>Trạng thái</th> <!-- Thêm cột trạng thái -->
-                <th>Hành động</th>
+                <th>SN</th>
+                <th>Product name</th>
+                <th>Image</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Describe</th>
+                <th>Specifications</th>
+                <th>Date posted</th>
+                <th>Status</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         <?php
-        if(isset($kq) && (count($kq) > 0)){
+        // Giả sử $kq chứa danh sách sản phẩm từ cơ sở dữ liệu
+        if(isset($kq) && count($kq) > 0){
             $start_index = ($current_page - 1) * $items_per_page;
             foreach ($kq as $index => $item){
                 $stt = $start_index + $index + 1;
@@ -103,17 +104,12 @@
                     }
                 }
 
+                // Lấy trạng thái từ checkbox
                 $status = [];
-                if ($item['new_arrival']) {
-                    $status[] = 'New Arrivals';
-                }
-                if ($item['featured']) {
-                    $status[] = 'Featured Products';
-                }
-                if ($item['best_seller']) {
-                    $status[] = 'Best Sellers';
-                }
-                $status_display = !empty($status) ? implode(', ', $status) : 'New Arrivals';
+                if ($item['new_arrival']) $status[] = 'New Arrivals';
+                if ($item['featured']) $status[] = 'Featured Products';
+                if ($item['best_seller']) $status[] = 'Best Sellers';
+                $status_display = !empty($status) ? implode(', ', $status) : 'There are no categories';
 
                 echo '<tr class="text-center">
                         <td class="align-middle">'.$stt.'</td>
@@ -124,7 +120,7 @@
                             </button>
                         </td>
                         <td class="align-middle">'.$ten_danh_muc.'</td>
-                        <td class="align-middle">'.number_format($item['gia'], 0, ',', '.').' đ</td>
+                        <td class="align-middle">'.number_format($item['gia'], 0, ',', '.').' $</td>
                         <td class="align-middle">'.$item['so_luong_hang'].'</td>
                         <td class="align-middle">'.substr($item['mo_ta_sp'], 0, 50).'...</td>
                         <td class="align-middle">
@@ -133,11 +129,11 @@
                             </button>
                         </td>
                         <td class="align-middle">'.$item['ngay_dang'].'</td>
-                        <td class="align-middle">'.$status_display.'</td> <!-- Hiển thị trạng thái -->
+                        <td class="align-middle">'.$status_display.'</td>
                         <td class="align-middle">
                             <div class="d-flex flex-column align-items-center">
-                                <a href="index.php?act=update_san_pham&id='.$item['id'].'" class="btn btn-sm btn-warning mb-2 w-50" onclick="return confirmEdit()">Sửa</a>
-                                <a href="#" class="btn btn-sm btn-danger w-50" onclick="confirmDelete(function() { window.location.href=\'index.php?act=delete_product&id='.$item['id'].'\'; })">Ẩn</a>
+                                <a href="index.php?act=update_san_pham&id='.$item['id'].'" class="btn btn-sm btn-warning mb-2 w-100" onclick="return confirmEdit()">Fix</a>
+                                <a href="#" class="btn btn-sm btn-danger w-100" onclick="confirmDelete(function() { window.location.href=\'index.php?act=delete_product&id='.$item['id'].'\'; })">Hidden</a>
                             </div>
                         </td>
                       </tr>';
@@ -148,8 +144,8 @@
     </table>
 
     <?php
-    // Tạo modals cho tất cả sản phẩm
-    if(isset($kq) && (count($kq) > 0)){
+    // Modal cho các sản phẩm
+    if(isset($kq) && count($kq) > 0){
         foreach ($kq as $item){
             // Modal cho thông số kỹ thuật
             echo '<div class="modal fade" id="specModal'.$item['id'].'" tabindex="-1" role="dialog" aria-labelledby="specModalLabel'.$item['id'].'" aria-hidden="true">
@@ -178,7 +174,7 @@
             // Modal cho hình ảnh
             $images = json_decode($item['images'], true);
             echo '<div class="modal fade" id="imageModal'.$item['id'].'" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel'.$item['id'].'" aria-hidden="true">
-                    <div class="modal-dialog modal-xl" role="document">
+                    <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="imageModalLabel'.$item['id'].'">Hình ảnh: '.$item['ten_sp'].'</h5>
@@ -218,10 +214,16 @@
     }
     ?>
 </div>
-<!-- Pagination -->
 
+<!-- Pagination -->
 <?php
-    require_once 'pagination.php';
-    echo renderPagination($current_page, $total_pages, '?act=san_pham&page=%d');
+require_once 'pagination.php';
+echo renderPagination($current_page, $total_pages, '?act=san_pham&page=%d');
 ?>
+
+<!-- Bootstrap CSS and JS for modal and carousel functionality -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
 <script src="http://localhost/fanimation/public/JS/back_product.js"></script>

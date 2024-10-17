@@ -6,13 +6,13 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', function(e) {
         if (fileInput.files.length > 6) {
             e.preventDefault();
-            alert('Bạn chỉ được chọn tối đa 6 ảnh.');
+            alert('You can only choose a maximum of 6 photos.');
         }
     });
 
     fileInput.addEventListener('change', function() {
         if (this.files.length > 6) {
-            alert('Bạn chỉ được chọn tối đa 6 ảnh.');
+            alert('You can only choose a maximum of 6 photos.');
             this.value = ''; // Reset input
             return;
         }
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var validTypes = ['image/jpeg', 'image/png', 'image/gif'];
         for (var i = 0; i < this.files.length; i++) {
             if (!validTypes.includes(this.files[i].type)) {
-                alert('Chỉ chấp nhận file ảnh có định dạng jpg, jpeg, png hoặc gif.');
+                alert('Only accept image files in jpg, jpeg, png or gif format.');
                 this.value = ''; // Reset input
                 break;
             }
@@ -39,13 +39,13 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', function(e) {
         if (fileInput.files.length > 6) {
             e.preventDefault();
-            alert('Bạn chỉ được chọn tối đa 6 ảnh.');
+            alert('You can only choose a maximum of 6 photos.');
         }
     });
 
     fileInput.addEventListener('change', function() {
         if (this.files.length > 6) {
-            alert('Bạn chỉ được chọn tối đa 6 ảnh.');
+            alert('You can only choose a maximum of 6 photos.');
             this.value = ''; // Reset input
             return;
         }
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var validTypes = ['image/jpeg', 'image/png', 'image/gif'];
         for (var i = 0; i < this.files.length; i++) {
             if (!validTypes.includes(this.files[i].type)) {
-                alert('Chỉ chấp nhận file ảnh có định dạng jpg, jpeg, png hoặc gif.');
+                alert('Only accept image files in jpg, jpeg, png or gif format.');
                 this.value = ''; // Reset input
                 break;
             }

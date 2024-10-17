@@ -127,5 +127,31 @@
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    function is_product_exists($ten_sp) {
+        $conn = connect_db();
+        $stmt = $conn->prepare("SELECT COUNT(*) FROM products WHERE ten_sp = :ten_sp");
+        $stmt->bindParam(':ten_sp', $ten_sp);
+        $stmt->execute();
+        $count = $stmt->fetchColumn();
+        
+        return $count > 0; 
+    }
+
+    function get_products_based_on_filters() {
+        global $current_page, $items_per_page; 
+    
+        $conn = connect_db();
+        $offset = ($current_page - 1) * $items_per_page; 
+    
+        
+        $sql = "SELECT * FROM products WHERE hien_thi_sp = 1 ORDER BY ngay_dang DESC LIMIT :limit OFFSET :offset"; 
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':limit', $items_per_page, PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+    
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     
 ?>

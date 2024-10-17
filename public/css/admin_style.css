@@ -1,0 +1,97 @@
+ /* Font và nền chính */
+ body, .navbar {
+    font-family: 'Quicksand', sans-serif;
+    background-color: #f0f9ff;
+    color: #333;
+}
+
+/* Navbar gradient mát mẻ */
+.navbar {
+    background: linear-gradient(135deg, #74b9ff, #a29bfe);
+    padding: 1rem 2rem;
+    box-shadow: 0 6px 15px rgba(102, 198, 255, 0.4);
+    border-radius: 0 0 30px 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Cánh quạt - Icon xoay */
+.fan-icon {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.4);
+    position: absolute;
+    animation: spin 10s linear infinite;
+    opacity: 0.9;
+}
+.fan-icon-1 { top: 15%; left: 10%; }
+.fan-icon-2 { top: 30%; right: 15%; animation-duration: 12s; }
+.fan-icon-3 { bottom: 20%; left: 20%; animation-duration: 8s; }
+.fan-icon-4 { bottom: 25%; right: 20%; animation-duration: 6s; }
+
+/* Hiệu ứng xoay */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Navbar brand với hiệu ứng mộng mơ */
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff !important;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: transform 0.3s, text-shadow 0.4s;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* Hiệu ứng hover cho navbar brand */
+.navbar-brand:hover {
+    transform: scale(1.1);
+    text-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+}
+
+/* Nav-link với màu sắc dịu nhẹ */
+.navbar-nav .nav-link {
+    color: #fefefe !important;
+    font-size: 1.1rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    transition: background 0.4s, color 0.4s;
+    position: relative;
+}
+
+/* Thêm hiệu ứng hover với màu gradient */
+.navbar-nav .nav-link:hover {
+    background: linear-gradient(135deg, #f8e1ff, #d4e4ff);
+    color: #ffffff !important;
+    box-shadow: 0 5px 10px rgba(102, 198, 255, 0.3);
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+    background: #a29bfe;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    border: none;
+}
+
+/* Dropdown item */
+.dropdown-item {
+    color: #ffffff;
+    font-weight: 500;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Hover cho dropdown */
+.dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.25);
+    color: #f0f9ff;
+}
+footer {
+flex-shrink: 0;
+padding: 20px;
+background-color: #a29bfe;
+display: flex;
+flex-direction: column;
+}

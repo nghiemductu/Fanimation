@@ -1,9 +1,9 @@
 <div class="container-fluid flex-grow-1 pt-4">
-    <h1 class="mb-4 text-center">Cập nhật Danh mục</h1>
+    <h1 class="mb-4 text-center">Update List</h1>
 
     <?php if (isset($_SESSION['success'])): ?>
         <script>
-            showSuccessAlert("Thành công!", "<?php echo $_SESSION['success']; ?>");
+            showSuccessAlert("Success!", "<?php echo $_SESSION['success']; ?>");
         </script>
         <?php unset($_SESSION['success']); ?>
     <?php endif; ?>
@@ -13,14 +13,14 @@
         
         <div class="row justify-content-center">
             <div class="col-md-2 mb-3">
-                <label for="ten_danh_muc" class="form-label">Tên danh mục</label>
+                <label for="ten_danh_muc" class="form-label">Category name</label>
                 <input type="text" class="form-control" id="ten_danh_muc" name="ten_danh_muc" value="<?php echo $dm['ten_danh_muc']; ?>" required>
             </div>
         </div>
         
         <div class="row justify-content-center">
             <div class="col-md-2 mb-3">
-                <label for="parent_id" class="form-label">Danh mục cha</label>
+                <label for="parent_id" class="form-label">Parent category</label>
                 <select class="form-control" id="parent_id" name="parent_id">
                     <option value="0">Danh mục gốc</option>
                     <?php
@@ -36,7 +36,7 @@
         </div>
 
         <div class="text-center mb-3">
-            <button type="submit" name="update" class="btn btn-primary">Cập nhật</button>
+            <button type="submit" name="update" class="btn btn-primary">Update</button>
         </div>
     </form>
 </div>

@@ -12,7 +12,7 @@ function add_user($username, $password, $email) {
 
 function get_all_users() {
     $conn = connect_db();
-    $sql = "SELECT id, user_name, email FROM user WHERE role = 1 AND hien_thi_user = 1 ORDER BY id";
+    $sql = "SELECT id, user_name, email FROM user WHERE role = 0 AND hien_thi_user = 1 ORDER BY id";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -28,7 +28,7 @@ function hide_user($id) {
 
 function get_hidden_users() {
     $conn = connect_db();
-    $sql = "SELECT id, user_name, email FROM user WHERE role = 1 AND hien_thi_user = 0 ORDER BY id";
+    $sql = "SELECT id, user_name, email FROM user WHERE hien_thi_user = 0 ORDER BY id";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);

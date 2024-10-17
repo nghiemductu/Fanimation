@@ -1,0 +1,89 @@
+.footer
+{
+    background-image: url('http://localhost/fanimation/img/img_bd_3.jpg');
+    background-repeat: no-repeat; 
+    width:100%; 
+    height: auto;
+    background-size: cover;
+    background-position: center; 
+    position: relative;
+    
+}
+.footer .container{
+    
+    background-color: rgba(0, 0, 0, 0.1); 
+}
+.footer .social-section {
+    background-color: #0077b6;
+    color: #fff;
+}
+.footer h6 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0077b6;
+}
+.footer a,
+.footer p
+ {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.footer a:hover {
+    color: #0077b6;
+}
+.footer hr {
+    width: 60px;
+    border-width: 2px;
+    border-color: #0077b6;
+}
+.text-muted {
+    font-size: 0.9rem;
+    color: #fff !important;
+
+}
+.social-icons a {
+    color: #333;
+    font-size: 1.2rem;
+    margin-right: 10px;
+    transition: transform 0.2s ease;
+}
+.social-icons a:hover {
+    transform: scale(1.1);
+}
+.footer .contact-info i {
+    color: #0077b6;
+    margin-right: 8px;
+}
+/* Scrolling banner */
+#scrolling-banner {
+    width: 100%;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    font-size: 18px;
+    padding: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+#scrolling-text {
+    display: inline-block;
+    animation: scroll 10s linear infinite;
+}
+
+@keyframes scroll {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+/* Custom alignment for left side */
+.left-align {
+    text-align: left;
+}
+
+/* Centering hr for Quạt Store */
+.center-hr hr {
+    margin: 0 auto; /* Center the hr element */
+}

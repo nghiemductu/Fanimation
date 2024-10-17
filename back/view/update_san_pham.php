@@ -1,27 +1,27 @@
 <div class="container-fluid flex-grow-1 pt-4">
-    <h1 class="mb-4 text-center">Cập nhật sản phẩm</h1>
+    <h1 class="mb-4 text-center">Product updates</h1>
 
     <form action="index.php?act=update_san_pham" method="post" enctype="multipart/form-data" class="mb-4" id="updateProductForm">
         <input type="hidden" name="id" value="<?php echo htmlspecialchars($sp['id']); ?>">
         
         <div class="row justify-content-center">
             <div class="col-md-2 mb-3">
-                <label for="ten_sp" class="form-label">Tên sản phẩm</label>
+                <label for="ten_sp" class="form-label">Product name</label>
                 <input type="text" class="form-control" id="ten_sp" name="ten_sp" value="<?php echo htmlspecialchars($sp['ten_sp']); ?>" required>
             </div>
             <div class="col-md-2 mb-3">
-                <label for="gia" class="form-label">Giá</label>
+                <label for="gia" class="form-label">Price</label>
                 <input type="number" class="form-control" id="gia" name="gia" value="<?php echo htmlspecialchars($sp['gia']); ?>" required>
             </div>
         </div>
         
         <div class="row justify-content-center">
             <div class="col-md-2 mb-3">
-                <label for="so_luong_hang" class="form-label">Số lượng</label>
+                <label for="so_luong_hang" class="form-label">Quantity</label>
                 <input type="number" class="form-control" id="so_luong_hang" name="so_luong_hang" value="<?php echo htmlspecialchars($sp['so_luong_hang']); ?>" required>
             </div>
             <div class="col-md-2 mb-3">
-                <label for="id_dm" class="form-label">Danh mục</label>
+                <label for="id_dm" class="form-label">Categpry</label>
                 <select class="form-control" id="id_dm" name="id_dm" required>
                     <option value="">Chọn danh mục</option>
                     <?php foreach ($dsdm as $dm): ?>
@@ -35,34 +35,34 @@
         
         <div class="row justify-content-center">
             <div class="col-md-2 mb-3">
-                <label for="cong_suat" class="form-label">Công suất</label>
-                <input type="text" class="form-control" id="cong_suat" name="cong_suat" value="<?php echo htmlspecialchars($sp['cong_suat']); ?>">
+                <label for="cong_suat" class="form-label">Capacity</label>
+                <input type="text" class="form-control" id="cong_suat" name="cong_suat" value="<?php echo htmlspecialchars($sp['cong_suat']); ?>" required>
             </div>
             <div class="col-md-2 mb-3">
-                <label for="cong_nghe" class="form-label">Công nghệ</label>
-                <input type="text" class="form-control" id="cong_nghe" name="cong_nghe" value="<?php echo htmlspecialchars($sp['cong_nghe']); ?>">
-            </div>
-        </div>
-        
-        <div class="row justify-content-center">
-            <div class="col-md-2 mb-3">
-                <label for="chat_lieu" class="form-label">Chất liệu</label>
-                <input type="text" class="form-control" id="chat_lieu" name="chat_lieu" value="<?php echo htmlspecialchars($sp['chat_lieu']); ?>">
-            </div>
-            <div class="col-md-2 mb-3">
-                <label for="chuc_nang" class="form-label">Chức năng</label>
-                <input type="text" class="form-control" id="chuc_nang" name="chuc_nang" value="<?php echo htmlspecialchars($sp['chuc_nang']); ?>">
+                <label for="cong_nghe" class="form-label">Technology</label>
+                <input type="text" class="form-control" id="cong_nghe" name="cong_nghe" value="<?php echo htmlspecialchars($sp['cong_nghe']); ?>" required>
             </div>
         </div>
         
         <div class="row justify-content-center">
             <div class="col-md-2 mb-3">
-                <label for="so_canh" class="form-label">Số cánh</label>
-                <input type="text" class="form-control" id="so_canh" name="so_canh" value="<?php echo htmlspecialchars($sp['so_canh']); ?>">
+                <label for="chat_lieu" class="form-label">Material</label>
+                <input type="text" class="form-control" id="chat_lieu" name="chat_lieu" value="<?php echo htmlspecialchars($sp['chat_lieu']); ?>" required>
             </div>
             <div class="col-md-2 mb-3">
-                <label for="toc_do" class="form-label">Tốc độ</label>
-                <input type="text" class="form-control" id="toc_do" name="toc_do" value="<?php echo htmlspecialchars($sp['toc_do']); ?>">
+                <label for="chuc_nang" class="form-label">Function</label>
+                <input type="text" class="form-control" id="chuc_nang" name="chuc_nang" value="<?php echo htmlspecialchars($sp['chuc_nang']); ?>" required>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-md-2 mb-3">
+                <label for="so_canh" class="form-label">Number of wings</label>
+                <input type="text" class="form-control" id="so_canh" name="so_canh" value="<?php echo htmlspecialchars($sp['so_canh']); ?>" required>
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="toc_do" class="form-label">Speed</label>
+                <input type="text" class="form-control" id="toc_do" name="toc_do" value="<?php echo htmlspecialchars($sp['toc_do']); ?>" required>
             </div>
         </div>
 
@@ -74,9 +74,9 @@
         
         <div class="row justify-content-center">
             <div class="col-md-3 mb-3">
-                <label for="imgs" class="form-label">Hình ảnh mới</label>
+                <label for="imgs" class="form-label">New images</label>
                 <input type="file" class="form-control" id="imgs" name="imgs[]" multiple accept="image/*">
-                <small class="form-text text-muted">Chọn tối đa 6 ảnh (jpg, jpeg, png, gif)</small>
+                <small class="form-text text-muted">Choose up to 6 photos (jpg, jpeg, png, gif)</small>
             </div>
         </div>
         
@@ -104,13 +104,13 @@
 
         <div class="row justify-content-center mb-3">
             <div class="col-md-8">
-                <label for="mo_ta_sp" class="form-label">Mô tả sản phẩm</label>
-                <textarea class="form-control" id="mo_ta_sp" name="mo_ta_sp" rows="5"><?php echo htmlspecialchars($sp['mo_ta_sp']); ?></textarea>
+                <label for="mo_ta_sp" class="form-label">Product description</label>
+                <textarea class="form-control" id="mo_ta_sp" name="mo_ta_sp" rows="5" required><?php echo htmlspecialchars($sp['mo_ta_sp']); ?></textarea>
             </div>
         </div>
 
         <div class="text-center mb-3">
-            <button type="submit" name="update" class="btn btn-primary">Cập nhật</button>
+            <button type="submit" name="update" class="btn btn-primary">Update</button>
         </div>
     </form>
 </div>

@@ -1,275 +1,287 @@
-<!-- First Video -->
-<div class="player position-relative">
-    <video id="video" class="w-100" loop muted autoplay playsinline>
-        <source src="/img/VIDEO/1.mp4" type="video/mp4" width="2880" height="1280" media="(min-width: 960px)">
-        <source src="/img/VIDEO/2.mp4" type="video/mp4" width="1600" height="1600" media="(min-width: 600px)">
-        <source src="/img/VIDEO/3.mp4" type="video/mp4" width="1080" height="1440" media="(max-width: 599px)">
-    </video>
-    <button id="toggleButton" class="toggle-button position-absolute">
-        <i class="fa fa-pause"></i>
-    </button>
+<!DOCTYPE html>
+<html lang="vi">
 
-    <div class="timer-title-container position-absolute">
-        <h1 class="title">SL 72</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fanimation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
+    <link href="http://localhost/fanimation/public/css/body.css" rel="stylesheet">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    const productId = this.dataset.id;
+                    const productName = this.dataset.name;
+                    const productPrice = this.dataset.price;
+                    const productImage = this.dataset.image;
+                    console.log(productImage);
+
+                    fetch('/fanimation/front/view/cart_handler.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                            },
+                            body: new URLSearchParams({
+                                action: 'add_to_cart',
+                                product_id: productId,
+                                product_name: productName,
+                                product_price: productPrice,
+                                product_image: productImage
+                            })
+                        })
+
+                        .then(response => response.json()) // Phân tích phản hồi dưới dạng JSON
+                        .then(data => {
+                            if (data.status === 'success') {
+                                alert(data.message); // Hiển thị thông báo tiếng Việt chính xác
+                            } else {
+                                alert('An error occurred while adding to cart!');
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="First-img">
+        <img src="http://localhost/fanimation/img/banner.jpg" alt="pic2">
+
     </div>
 
-    <div class="summary">   
-        <span class="summary-text1">Discover the effortless appeal of the</span>
-        <span class="summary-text2">retro-inspired classic.</span>
-    </div>
-
-    <div class="cta-list-container ">
-        <a href="#" class="cta-button">SHOP NOW <i class="fa fa-arrow-right"></i></a>
-    </div>
-</div>
-
-<div class="tab-wrapper">
-    <div class="tab-container d-flex flex-nowrap align-items-center">
-        <h1>New Arrivals</h1>
-    </div>
-</div>
-
-<div class="slider-wrapper" style="position: relative;">
-    <button id="prev-slide" class="slide-button material-symbols-rounded">chevron_left</button>
     
-    <div class="image-list slide-1">
-        <?php if (isset($new_arrivals) && is_array($new_arrivals)): ?>
-            <?php foreach ($new_arrivals as $product): ?>
-                <div class="image-item">
-                    <div class="image-image">
-                        <?php 
-                        $images = json_decode($product['images'], true);
-                        $first_image = $images[0] ?? '/img/default-product.jpg';
-                        ?>
-                        <a href="http://localhost/fanimation/front/view/pd_detail.php?id=<?php echo $product['id']; ?>">
-                            <img src="<?php echo $first_image; ?>" alt="<?php echo htmlspecialchars($product['ten_sp']); ?>">
-                        </a>
-                        <div class="price"><?php echo number_format($product['gia'], 0, ',', '.'); ?>₫</div>
-                        <div class="image-icon"><i class="fa-regular fa-heart"></i></div>
-                    </div>
-                    <p class="product-name"><?php echo htmlspecialchars($product['ten_sp']); ?></p>
-                    <p class="product-category">Performance</p>
-                </div>
-            <?php endforeach; ?>
-        <?php endif; ?>
-    </div>
 
-    <button id="next-slide" class="slide-button material-symbols-rounded">chevron_right</button>
-</div>
+    <div class="container main-container">
+        <div class="New-arrival">
+            <h1 class="display-4">New Arrivals</h1>
+            <p class="lead">Explore our collection of modern, luxurious and energy-efficient electric fans and ceiling fans today!</p>
+        </div>
 
-<div class="slider-scrollbar">
-    <div class="scrollbar-track">
-        <div class="scrollbar-thumb"></div>
-    </div>
-</div>
-
-<!-- Second Video -->
-<div class="player" style="margin-top: 70px;">
-    <video id="video-2" loop muted autoplay playsinline>
-        <source src="/img/second2.mp4" type="video/mp4" width="2880px" height="1280px" media="(min-width: 960px)">
-    </video>
-    <button id="toggleButton2" class="toggle-button">
-        <i class="fa fa-pause video2-icon"></i>
-    </button>
-    
-    <div class="timer-title-container-2">
-        <h2 class="title">THE GAMES NEVER STOPS</h2>
-    </div>
-    
-    <div class="cta-list-container">
-        <a href="#" class="cta-button">SHOP NOW <i class="fa fa-arrow-right " id="second-pause"></i></a>
-    </div>
-</div>
-
-<div class="tab-wrapper">
-    <div class="tab-container d-flex flex-nowrap align-items-center">
-        <h1>Featured Products</h1> 
-    </div>
-</div>
-
-<div class="slider-wrapper" style="position: relative;">
-    <button id="prev-slide-2" class="slide-button material-symbols-rounded">chevron_left</button>
-    
-    <div class="image-list slide-1">
-        <?php $featured_products = get_featured_products(); ?>
-        <?php foreach ($featured_products as $product): ?>
-            <div class="image-item">
-                <div class="image-image">
-                    <?php 
-                    $images = json_decode($product['images'], true);
-                    $first_image = $images[0] ?? '/img/default-product.jpg';
-                    ?>
-                    <a href="pd_detail.php?id=<?php echo $product['id']; ?>">
-                        <img src="<?php echo $first_image; ?>" alt="<?php echo htmlspecialchars($product['ten_sp']); ?>">
-                    </a>
-                    <div class="price"><?php echo number_format($product['gia'], 0, ',', '.'); ?>₫</div>
-                    <div class="image-icon"><i class="fa-regular fa-heart"></i></div>
-                </div>
-                <p class="product-name"><?php echo htmlspecialchars($product['ten_sp']); ?></p>
-                <p class="product-category">Performance</p>
+        <div class="container my-5">
+            <div class="row">
+                <?php if (is_array($new_arrivals)): ?>
+                    <?php foreach (array_slice($new_arrivals, 0, 20) as $product): ?>
+                        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                            <div class="card h-100">
+                                <?php
+                                $images = isset($product['images']) ? json_decode($product['images'], true) : [];
+                                $first_image = $images[0] ?? '/img/default-product.jpg';
+                                
+                                ?>
+                                <a href="index.php?act=pd_detail&product_id=<?php echo $product['id']; ?>">
+                                    <img src="<?php echo $first_image; ?>" class="card-img-top" alt="<?php echo htmlspecialchars($product['ten_sp']); ?>">
+                                </a>
+                                <div class="card-body">
+                                    <h5 class="card-title"><?php echo htmlspecialchars($product['ten_sp']); ?></h5>
+                                    <p class="card-text"><?php echo number_format($product['gia'], 0, ',', '.'); ?>$</p>
+                                    <a href="#" class="market-button add-to-cart"
+                                        data-id="<?php echo $product['id']; ?>"
+                                        data-name="<?php echo htmlspecialchars($product['ten_sp']); ?>"
+                                        data-price="<?php echo $product['gia']; ?>"
+                                        data-image="<?php echo $first_image; ?>">
+                                        Add to cart
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
-        <?php endforeach; ?>
+        </div>
     </div>
-    
-    <button id="next-slide-2" class="slide-button material-symbols-rounded">chevron_right</button>
-</div>
 
-<div class="slider-scrollbar">
-    <div class="scrollbar-track">
-        <div class="scrollbar-thumb"></div>
+
+    <div class="container section-wrapper">
+        <div class="row">
+            <div class="col-lg-3 col-md-12 text-section-1">
+                <h2 class="section-title-1">What is Fanimation?</h2>
+                <div class="zigzag-line"></div>
+            </div>
+
+            <div class="col-lg-5 col-md-12 text-section-2">
+                <h2 class="section-title-2">A Window Connecting Fanimation People to the World</h2>
+                <br>
+                <div class="underline"></div>
+                <p>Welcome to Fanimation, the largest platform for buying and selling fan equipment in the world.</p>
+                <p>
+                We operate as a commercial bridge for manufacturers and retailers worldwide to access the global market. All of our stores are owned by Fanimation. We aim to work together to provide products for everyone, from retail customers to wholesale merchants. Meet the manufacturers of Fanimation.
+                </p>
+            </div>
+
+            <div class="col-lg-4 col-md-12 image-section">
+                <img src="http://localhost/fanimation/img/img_bd_1.jpg" alt="pic2">
+            </div>
+        </div>
     </div>
-</div>
 
-<div class="tab-wrapper">
-    <div class="tab-container d-flex flex-nowrap align-items-center">
+    <div class="New-arrival mt-5">
+        <h1>Featured Products</h1>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <!-- Featured Products -->
+            <?php if (is_array($featured_products)): ?>
+
+                <?php foreach (array_slice($featured_products, 0, 20) as $product): ?> <!-- Hiển thị tối đa 20 sản phẩm -->
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                        <div class="card h-100">
+                            <?php
+                            // Giải mã JSON nếu cần
+                            $images = isset($product['images']) ? json_decode($product['images'], true) : [];
+                            // Lấy ảnh đầu tiên hoặc ảnh mặc định
+                            $first_image = $images[0] ?? '/img/default-product.jpg';
+                            ?>
+                            <a href="index.php?act=pd_detail&product_id=<?php echo $product['id']; ?>">
+                                <img src="<?php echo $first_image; ?>" class="card-img-top" alt="<?php echo htmlspecialchars($product['ten_sp']); ?>">
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo htmlspecialchars($product['ten_sp']); ?></h5>
+                                <p class="card-text"><?php echo number_format($product['gia'], 0, ',', '.'); ?>$</p>
+                                <a href="#" class="market-button add-to-cart"
+                                    data-id="<?php echo $product['id']; ?>"
+                                    data-name="<?php echo htmlspecialchars($product['ten_sp']); ?>"
+                                    data-price="<?php echo $product['gia']; ?>"
+                                    data-image="<?php echo $first_image; ?>">Add to cart</a>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <div class="advantages-section">
+        <div class="advantages-overlay" style="background-image: url('http://localhost/fanimation/img/img_bd_2.jpg');background-repeat: no-repeat; width:100%; height: 600px;background-size: cover;
+    background-position: center;"></div>
+        <div class="advantages-content">
+            <h2 class="advantages-title">The Advantages of Buying at Fanimation</h2>
+            <div class="zigzag-unique">
+                <svg width="200" height="10" viewBox="0 0 200 10" xmlns="http://www.w3.org/2000/svg">
+                    <polyline points="0,5 10,0 20,5 30,0 40,5 50,0 60,5 70,0 80,5 90,0 100,5 110,0 120,5 130,0 140,5 150,0 160,5 170,0 180,5 190,0 200,5" fill="none" stroke="white" stroke-width="2" />
+                </svg>
+            </div>
+            <h4 class="advantages-text">
+                You get local pricing from the artisans no matter what and fast and inexpensive shipping. Retail buyers can acquire Fanimation items at a discount. However, the trick for wholesale buyers to get lower shipping costs per item is to buy more products. We have worked hard to get the lowest processing prices and shipping discounts to get you the best price possible while still respecting the artisan’s fees. <a href="#">Read more about how it works.</a>
+            </h4>
+        </div>
+    </div>
+
+    <div class="New-arrival mt-5">
         <h1>Best Sellers</h1>
     </div>
-</div>
 
-<div class="slider-wrapper" style="position: relative;">
-    <button id="prev-slide-3" class="slide-button material-symbols-rounded">chevron_left</button>
-    
-    <div class="image-list slide-1">
-        <?php $best_sellers = get_best_sellers(); ?>
-        <?php foreach ($best_sellers as $product): ?>
-            <div class="image-item">
-                <div class="image-image">
-                    <?php 
-                    $images = json_decode($product['images'], true);
-                    $first_image = $images[0] ?? '/img/default-product.jpg';
-                    ?>
-                    <a href="pd_detail.php?id=<?php echo $product['id']; ?>">
-                        <img src="<?php echo $first_image; ?>" alt="<?php echo htmlspecialchars($product['ten_sp']); ?>">
-                    </a>
-                    <div class="price"><?php echo number_format($product['gia'], 0, ',', '.'); ?>₫</div>
-                    <div class="image-icon"><i class="fa-regular fa-heart"></i></div>
-                </div>
-                <p class="product-name"><?php echo htmlspecialchars($product['ten_sp']); ?></p>
-                <p class="product-category">Performance</p>
-            </div>
-        <?php endforeach; ?>
+    <div class="container my-5">
+        <div class="row">
+            <!-- Best Sellers -->
+            <?php if (is_array($best_sellers)): ?>
+
+                <?php foreach (array_slice($best_sellers, 0, 20) as $product): ?> <!-- Hiển thị tối đa 20 sản phẩm -->
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                        <div class="card h-100">
+                            <?php
+                            $images = isset($product['images']) ? json_decode($product['images'], true) : [];
+                            $first_image = $images[0] ?? '/img/default-product.jpg';
+                            ?>
+                            <a href="index.php?act=pd_detail&product_id=<?php echo $product['id']; ?>">
+                                <img src="<?php echo $first_image; ?>" class="card-img-top" alt="<?php echo htmlspecialchars($product['ten_sp']); ?>">
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo htmlspecialchars($product['ten_sp']); ?></h5>
+                                <p class="card-text"><?php echo number_format($product['gia'], 0, ',', '.'); ?>$</p>
+                                <a href="#" class="market-button add-to-cart"
+                                    data-id="<?php echo $product['id']; ?>"
+                                    data-name="<?php echo htmlspecialchars($product['ten_sp']); ?>"
+                                    data-price="<?php echo $product['gia']; ?>"
+                                    data-image="<?php echo $first_image; ?>">Add to cart</a>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
     </div>
-    
-    <button id="next-slide-3" class="slide-button material-symbols-rounded">chevron_right</button>
-</div>
 
-<div class="slider-scrollbar">
-    <div class="scrollbar-track">
-        <div class="scrollbar-thumb"></div>
-    </div>
-</div>
 
-<div class="below-1">
-    <div class="inside-below-1">
-        <h1>STORIES, STYLES AND SPORTSWEAR AT ADIDAS, SINCE 1949</h1>
-        <p>Sport keeps us fit. Keeps you mindful. Brings us together. Through sport we have the power to change lives. Whether it is through stories of inspiring athletes. Helping you to get up and get moving. Sportswear featuring the latest technologies, to up your performance. Beat your PB.adidas offers a home to the runner, the basketball player, the soccer kid, the fitness enthusiast. The weekend hiker that loves to escape the city. The yoga teacher that spreads the moves. The 3-Stripes are seen in the music scene. On stage, at festivals. Our sports clothing keeps you focused before that whistle blows. During the race. And at the finish lines. We’re here to support creators. Improve their game. Their lives. And change the world.
-
-        <br>
-
-        <br>
-
-        adidas is about more than sportswear and workout clothes. We partner with the best in the industry to co-create. This way we offer our fans the sports apparel and style that match their athletic needs, while keeping sustainability in mind. We’re here to support creators. Improve their game. Create change. And we think about the impact we have on our world.
-
-        </p>
-
-        <div>
-
-            <img src="/img/adidas_logo_white.jpg" alt="">
-
+    <div class="container my-5">
+    <div class="row">
+        <div class="col-md-3 mb-4">
+            <a href="http://localhost/fanimation/front/view/bai_viet1.html">
+                <img src="http://localhost/fanimation/img/bai_viet/bai_viet1.jpg" alt="Bài viết 1" class="img-fluid article-image">
+                <h8>Sải cánh quạt trần phù hợp với không gian</h8>
+            </a>
+            <p>Khi chọn quạt trần chúng ta rất hay không để ý tới những chi tiết như chiều dài sải cánh quạt</p>
+        </div>
+        <div class="col-md-3 mb-4">
+            <a href="http://localhost/fanimation/front/view/bai_viet2.html">
+                <img src="http://localhost/fanimation/img/bai_viet/bai_viet2.jpg" alt="Bài viết 2" class="img-fluid article-image">
+                <h8>Bí quyết chọn Quạt trần phù hợp nhất cho ngôi nhà của mình.</h8>
+            </a>
+            <p>Quạt trần là gì? Quạt trần là một thiết bị treo trên trần của một căn phòng, với các cánh</p>
+        </div>
+        <div class="col-md-3 mb-4">
+            <a href="http://localhost/fanimation/front/view/bai_viet3.html">
+                <img src="http://localhost/fanimation/img/bai_viet/bai_viet3.jpg" alt="Bài viết 3" class="img-fluid article-image">
+                <h8>Cách chọn Quạt Trần dựa theo những tiêu chí nào?</h8>
+            </a>
+            <p>Bạn đang cần mua cho gia đình mình một sản phẩm quạt trần với chất lượng hàng đầu chưa từng có</p>
+        </div>
+        <div class="col-md-3 mb-4">
+            <a href="http://localhost/fanimation/front/view/bai_viet4.html">
+                <img src="http://localhost/fanimation/img/bai_viet/bai_viet4.jpg" alt="Bài viết 4" class="img-fluid article-image">
+                <h8>Những lợi ích tuyệt vời khi sử dụng Quạt Trần</h8>
+            </a>
+            <p>Quạt trần là sự lựa chọn không thể thiếu trong mỗi gia đình trong những ngày hè nóng nực</p>
         </div>
     </div>
 </div>
 
 
-<div class="below-mobile-1">
+    <script>
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
 
-    <h5>YOUR OPINION COUNTS</h5>
-    <p>We strive to serve you better and appreciate your feedback</p>
+                const productId = this.dataset.id;
+                const productName = this.dataset.name;
+                const productPrice = this.dataset.price;
+                const productImage = this.dataset.image;
+               
+                
+                fetch(window.location.href, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: new URLSearchParams({
+                            action: 'add_to_cart',
+                            product_id: productId,
+                            product_name: productName,
+                            product_price: productPrice,
+                            product_image: productImage
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            alert(data.message);
+                        } else {
+                            alert('Có lỗi xảy ra khi thêm vào giỏ hàng!');
+                        }
+                    })
+                    .catch(error => console.error('Lỗi:', error));
+            });
+        });
+    </script>
 
-    <a href="#">Please fill out this short survey.</a>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+</body>
 
-</div>
-
-
-<div class="below-mobile-2">
-
-    <i class="fa-solid fa-chevron-up"></i>
-
-    <p>BACK TO TOP</p>
-
-</div>
-
-<div class="below-mobile-3">
-
-    <a href="#">LOGIN</a>
-
-    <a href="#">YOUR BAG(0)</a>
-</div>
-
-
-<div class="below-2 ">
-
-    <h1>BECOME A MEMBER & GET 15% OFF</h1>
-
-    <div class="below-2-button">
-
-        <a href="#">SIGN UP FOR FREE <i class="fa fa-arrow-right"></i></a>
-
-    </div>
-</div>
-
-
-<div class="below-3">
-
-    <div class="column">
-        <h5>PRODUCTS</h5>
-
-        <ul>
-
-            <li><a href="#">Footwear</a></li>
-
-            <li><a href="#">Clothing</a></li>
-
-            <li><a href="#">Accessories</a></li>
-            <li><a href="#">New Arrivals</a></li>
-            <li><a href="#">Release Dates</a></li>
-
-            <li><a href="#">Top Sellers</a></li>
-
-            <li><a href="#">Member Exclusives</a></li>
-
-            <li><a href="#">Outlet</a></li>
-        </ul>
-
-    </div>
-
-    <div class="column">
-        <h5>SPORTS</h5>
-
-        <ul>
-
-            <li><a href="#">Running</a></li>
-
-            <li><a href="#">Golf</a></li>
-
-            <li><a href="#">Gym & Training</a></li>
-
-            <li><a href="#">Football</a></li>
-
-            <li><a href="#">Basketball</a></li>
-
-            <li><a href="#">Tennis</a></li>
-            <li><a href="#">Outdoor</a></li>
-            <li><a href="#">Swimming</a></li>
-
-        </ul>
-
-    </div>
-
-    <div class="column">
-        <h5>COLLECTIONS</h5>
-
-        <ul>
-            <li><a href="#">Pharrell Williams</a></li>
-
-            <li><a
+</html>

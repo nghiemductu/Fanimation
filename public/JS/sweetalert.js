@@ -27,26 +27,25 @@ function confirmDelete(callback) {
     });
 }
 
-// Hàm xác nhận khôi phục
+function confirmHide(url) {
+    if (confirm("Are you sure you want to hide this comment?")) {
+        window.location.href = url;
+    }
+}
+
 function confirmRestore(url) {
-    Swal.fire({
-        title: "Bạn có chắc muốn khôi phục mục này?",
-        showCancelButton: true,
-        confirmButtonText: "Khôi phục",
-    }).then((result) => {
-        if (result.isConfirmed) {
-            window.location.href = url; // Chuyển hướng đến URL khôi phục
-        }
-    });
+    if (confirm("Are you sure you want to restore this comment?")) {
+        window.location.href = url;
+    }
 }
 
 // Xác nhận ẩn người dùng
 function confirmHideUser(userId) {
     Swal.fire({
-        title: "Bạn có chắc muốn ẩn người dùng này?",
+        title: "Are you sure you want to hide this user?",
         showCancelButton: true,
-        confirmButtonText: "Ẩn",
-        cancelButtonText: "Hủy"
+        confirmButtonText: "Hide",
+        cancelButtonText: "Cancel"
     }).then((result) => {
         if (result.isConfirmed) {
             // Nếu xác nhận, chuyển hướng đến URL ẩn người dùng
