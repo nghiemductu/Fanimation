@@ -53,7 +53,7 @@
                     <tr>
                         <td class="text-center align-middle"><?php echo $stt_product++; ?></td>
                         <td class="text-center align-middle"><?php echo $sp['ten_sp']; ?></td>
-                        <td class="text-center align-middle"><?php echo number_format($sp['gia'], 0, ',', '.'); ?> đ</td>
+                        <td class="text-center align-middle"><?php echo number_format($sp['gia'], 0, ',', '.'); ?> $</td>
                         <td class="text-center align-middle">
                             <a href="#" class="btn btn-sm btn-success" onclick="confirmRestore('index.php?act=restore_product&id=<?php echo $sp['id']; ?>')">Restore</a>
                         </td>

@@ -1,11 +1,7 @@
 <?php
 function getall_dm() {
     $conn = connect_db();
-    $sql = "SELECT *, 
-            CASE 
-                WHEN parent_id = 0 OR parent_id IS NULL THEN 0 
-                ELSE 1 
-            END AS level 
+    $sql = "SELECT * 
             FROM category 
             WHERE hien_thi_dm = 1 
             ORDER BY parent_id, id";
@@ -34,14 +30,6 @@ function update_category($id, $ten_danh_muc, $parent_id) {
     $stmt->execute();
 }
 
-function delete_category($id) {
-    $conn = connect_db();
-    $sql = "UPDATE category SET hien_thi_dm = 0 WHERE id = :id";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':id', $id);
-    $stmt->execute();
-}
-
 function get_category($id) {
     $conn = connect_db();
     $sql = "SELECT * FROM category WHERE id = :id";
@@ -49,6 +37,14 @@ function get_category($id) {
     $stmt->bindParam(':id', $id);
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+function delete_category($id) {
+    $conn = connect_db();
+    $sql = "UPDATE category SET hien_thi_dm = 0 WHERE id = :id";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
 }
 
 function restore_category($id) {

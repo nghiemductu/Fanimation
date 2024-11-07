@@ -91,7 +91,7 @@ $first_image = (!empty($images) && !empty($images[0])) ? htmlspecialchars($image
                             <?php foreach ($images as $index => $image): ?>
                                 <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
                                     <div class="image-wrapper">
-                                        <img src="<?php echo htmlspecialchars($image); ?>" class="img-fluid" alt="<?php echo htmlspecialchars($product['ten_sp']); ?>">
+                                    <img src="http://localhost/fanimation/upload/<?php echo htmlspecialchars($image); ?>" class="img-fluid" alt="<?php echo htmlspecialchars($product['ten_sp']); ?>">
                                     </div>
                                 </div>
                             <?php endforeach; ?>
@@ -107,7 +107,7 @@ $first_image = (!empty($images) && !empty($images[0])) ? htmlspecialchars($image
                     </div>
                     <div class="d-flex justify-content-start mt-3" style="position: absolute; height:100px; width:calc(100% /  6)">
                         <?php foreach ($images as $index => $image): ?>
-                            <img src="<?php echo htmlspecialchars($image); ?>" class="img-thumbnail thumbnail-small" alt="<?php echo htmlspecialchars($product['ten_sp']); ?>" onclick="changeImage('<?php echo htmlspecialchars($image); ?>', this)">
+                            <img src="http://localhost/fanimation/upload/<?php echo htmlspecialchars($image); ?>" class="img-thumbnail thumbnail-small" alt="<?php echo htmlspecialchars($product['ten_sp']); ?>" onclick="changeImage('<?php echo htmlspecialchars($image); ?>', this)">
                         <?php endforeach; ?>
                     </div>
                 </div>
@@ -195,7 +195,7 @@ $first_image = (!empty($images) && !empty($images[0])) ? htmlspecialchars($image
                         <button type="submit" class="market-button review-button">Submit a review</button>
                 </form>
             <?php else: ?>
-                <p>Please <a href="login.php">log in</a> to submit a review.</p>
+                <p>Please <a href="http://localhost/fanimation/front/view/login.php">log in</a> to submit a review.</p>
             <?php endif; ?>
 
             <!-- Hiển thị các đánh giá hiện có -->
@@ -222,46 +222,53 @@ $first_image = (!empty($images) && !empty($images[0])) ? htmlspecialchars($image
     $similar_products = get_similar_products($product['id_danh_muc'], $product['id'], 8);
     ?>
 
-<div class="row text-center mt-5">
-    <?php if (is_array($similar_products) && count($similar_products) > 0): ?>
-        <?php foreach ($similar_products as $similar_product): ?>
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                <div class="card h-100">
-                    <?php
-                    $images = json_decode($similar_product['images'], true);
-                    $first_image = !empty($images) ? 'http://localhost/fanimation/upload/' . $images[0] : '/img/default-product.jpg';
-                    ?>
-                    <a href="index.php?act=pd_detail&product_id=<?php echo $similar_product['id']; ?>">
-                        <img src="<?php echo htmlspecialchars($first_image); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($similar_product['ten_sp']); ?>">
-                    </a>
-                    <div class="card-body text-start">
-                        <h5 class="card-title"><?php echo htmlspecialchars($similar_product['ten_sp']); ?></h5>
-                        <p class="card-text"><?php echo number_format($similar_product['gia'], 0, ',', '.'); ?>$</p>
-                        <a href="#" class="market-button add-to-cart"
-                            data-id="<?php echo $similar_product['id']; ?>"
-                            data-name="<?php echo htmlspecialchars($similar_product['ten_sp']); ?>"
-                            data-price="<?php echo $similar_product['gia']; ?>"
-                            data-image="<?php echo $first_image; ?>">Add to cart</a>
+    <div class="row text-center mt-5">
+        <?php if (is_array($similar_products) && count($similar_products) > 0): ?>
+            <?php foreach ($similar_products as $similar_product): ?>
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card h-100">
+                        <?php
+                        $images = json_decode($similar_product['images'], true);
+                        $first_image = !empty($images) ? 'http://localhost/fanimation/upload/' . $images[0] : '/img/default-product.jpg';
+                        ?>
+                        <a href="index.php?act=pd_detail&product_id=<?php echo $similar_product['id']; ?>">
+                            <img src="<?php echo htmlspecialchars($first_image); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($similar_product['ten_sp']); ?>">
+                        </a>
+                        <div class="card-body text-start">
+                            <h5 class="card-title"><?php echo htmlspecialchars($similar_product['ten_sp']); ?></h5>
+                            <p class="card-text"><?php echo number_format($similar_product['gia'], 0, ',', '.'); ?>$</p>
+                            <a href="#" class="market-button add-to-cart"
+                                data-id="<?php echo $similar_product['id']; ?>"
+                                data-name="<?php echo htmlspecialchars($similar_product['ten_sp']); ?>"
+                                data-price="<?php echo $similar_product['gia']; ?>"
+                                data-image="<?php echo $first_image; ?>">Add to cart</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        <?php endforeach; ?>
-    <?php else: ?>
-        <p>There are no similar products.</p>
-    <?php endif; ?>
-</div>
-        </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>There are no similar products.</p>
+        <?php endif; ?>
     </div>
+ 
+ 
+   
 
     <!-- Bao gồm tập lệnh giỏ hàng -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.querySelector('.add-to-cart').addEventListener('click', function() {
-            const productId = this.getAttribute('data-id');
-            const productName = this.getAttribute('data-name');
-            const productPrice = this.getAttribute('data-price');
-            const productImage = this.getAttribute('data-image');
-            const quantity = document.getElementById('quantity').value;
+<script>
+    // Use event delegation to handle clicks on all 'add-to-cart' buttons
+    document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('add-to-cart')) {
+            event.preventDefault(); // Ngăn chặn hành vi mặc định của trình duyệt
+
+            const button = event.target;
+            const productId = button.getAttribute('data-id');
+            const productName = button.getAttribute('data-name');
+            const productPrice = button.getAttribute('data-price');
+            const productImage = button.getAttribute('data-image');
+            const quantityElement = document.getElementById('quantity');
+            const quantity = quantityElement ? quantityElement.value : 1; // Default to 1 if not found
 
             fetch('http://localhost/fanimation/front/view/cart_handler.php', {
                     method: 'POST',
@@ -286,8 +293,9 @@ $first_image = (!empty($images) && !empty($images[0])) ? htmlspecialchars($image
                     }
                 })
                 .catch(error => console.error('Error:', error));
-        });
-    </script>
+        }
+    });
+</script>
 </body>
 
 </html>

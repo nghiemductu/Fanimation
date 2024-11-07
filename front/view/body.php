@@ -59,8 +59,11 @@
 
     <div class="container main-container">
         <div class="New-arrival">
-            <h1 class="display-4">New Arrivals</h1>
-            <p class="lead">Explore our collection of modern, luxurious and energy-efficient electric fans and ceiling fans today!</p>
+            <div class="title-arrival">
+                <h1 class="display-4">New Arrivals</h1>
+                <p class="lead">Explore our collection of modern, luxurious and energy-efficient electric fans and ceiling fans today!</p>
+        
+            </div>
         </div>
 
         <div class="container my-5">
@@ -104,7 +107,7 @@
                 <div class="zigzag-line"></div>
             </div>
 
-            <div class="col-lg-5 col-md-12 text-section-2">
+            <div class="col-lg-5 col-md-12 text-section-2 ">
                 <h2 class="section-title-2">A Window Connecting Fanimation People to the World</h2>
                 <br>
                 <div class="underline"></div>
@@ -120,8 +123,11 @@
         </div>
     </div>
 
-    <div class="New-arrival mt-5">
-        <h1>Featured Products</h1>
+    <div class="New-arrival mt-5 ">
+        <div class="container title-product">
+            <h1>Featured Products</h1>
+        
+        </div>
     </div>
 
     <div class="container my-5">
@@ -174,7 +180,9 @@
     </div>
 
     <div class="New-arrival mt-5">
-        <h1>Best Sellers</h1>
+        <div class="container title-sellers">
+            <h1>Best Sellers</h1>
+        </div>
     </div>
 
     <div class="container my-5">

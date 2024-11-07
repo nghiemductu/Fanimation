@@ -24,7 +24,7 @@ if (isset($_GET['act'])) {
                 $parent_id = $_POST['parent_id'];
                 add_category($ten_danh_muc, $parent_id);
                 
-                $_SESSION['success'] = "Thêm danh mục thành công!";
+                $_SESSION['success'] = "Added category successfully!";
             }
             header("Location: index.php?act=danh_muc");
             break;
@@ -67,25 +67,26 @@ if (isset($_GET['act'])) {
             header("Location: index.php?act=hidden_items"); // Chuyển hướng về trang mục ẩn
             break;
 
-        case 'muc_an':
-            $hidden_categories = get_hidden_categories(); // Lấy danh mục ẩn
-            include "view/muc_an.php";
-            break;
+        // case 'muc_an':
+        //     $hidden_categories = get_hidden_categories(); // Lấy danh mục ẩn
+        //     include "view/muc_an.php";
+        //     break;
+
 
         case 'san_pham':
             $dsdm = getall_dm();
-            $items_per_page = 10; 
+            $limit = 10; 
             $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
             $total_items = count_san_pham();
-            $total_pages = ceil($total_items / $items_per_page);
-            $start = ($current_page - 1) * $items_per_page;
-            
-            $kq = get_products_paginated($start, $items_per_page);
+            $total_pages = ceil($total_items / $limit); 
+            $start = ($current_page - 1) * $limit; 
+
+            $kq = get_products_paginated($start, $limit); 
             include "view/san_pham.php";
             break;
 
         case 'add_san_pham':
-            if(isset($_POST['add_new'])) {
+            if (isset($_POST['add_new'])) {
                 $ten_sp = $_POST['ten_sp'];
                 $gia = $_POST['gia'];
                 $id_danh_muc = $_POST['id_dm'];
@@ -97,46 +98,47 @@ if (isset($_GET['act'])) {
                 $chuc_nang = $_POST['chuc_nang'];
                 $so_canh = $_POST['so_canh'];
                 $toc_do = $_POST['toc_do'];
-                            
+
                 $images = array();
-                if(isset($_FILES['imgs'])) {
+                if (isset($_FILES['imgs'])) {
                     $file_count = count($_FILES['imgs']['name']);
-                    for($i = 0; $i < $file_count; $i++) {
-                        if($_FILES['imgs']['error'][$i] == 0) {
+                    for ($i = 0; $i < $file_count; $i++) {
+                        if ($_FILES['imgs']['error'][$i] == 0) {
                             $target_dir = "../upload/";
                             $target_file = $target_dir . basename($_FILES["imgs"]["name"][$i]);
-                            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+                            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
                             $newFileName = uniqid() . '.' . $imageFileType;
                             $target_file = $target_dir . $newFileName;
                             if (move_uploaded_file($_FILES["imgs"]["tmp_name"][$i], $target_file)) {
                                 $images[] = $target_file;
+                            } else {
+                                $_SESSION['error'] = "Unable to move the uploaded file: " . htmlspecialchars($_FILES['imgs']['name'][$i]);
                             }
+                        } else {
+                            $_SESSION['error'] = "File upload error: " . $_FILES['imgs']['error'][$i];
                         }
                     }
                 }
-                            
-                // Lấy giá trị từ checkbox
+
                 $new_arrival = isset($_POST['new_arrival']) ? 1 : 0;
                 $featured = isset($_POST['featured']) ? 1 : 0;
                 $best_seller = isset($_POST['best_seller']) ? 1 : 0;
 
-                // Gọi hàm insert_product với các tham số
                 insert_product($id_danh_muc, $ten_sp, $gia, $so_luong_hang, $mo_ta_sp, $images, $cong_suat, $cong_nghe, $chat_lieu, $chuc_nang, $so_canh, $toc_do, $new_arrival, $featured, $best_seller);
                 header("Location: index.php?act=san_pham");
                 $_SESSION['success'] = "Add product successfully!";
-                header("Location: index.php?act=san_pham");
                 exit(); // Dừng thực thi để tránh gửi thêm thông báo
             }
             break;
 
         case 'update_san_pham':
-            if(isset($_GET['id'])){
+            if (isset($_GET['id'])) {
                 $id = $_GET['id'];
                 $sp = get_product($id);
                 $dsdm = getall_dm();
                 include "view/update_san_pham.php";
             }
-            if(isset($_POST['update'])){
+            if (isset($_POST['update'])) {
                 $id = $_POST['id'];
                 $ten_sp = $_POST['ten_sp'];
                 $gia = $_POST['gia'];
@@ -149,37 +151,37 @@ if (isset($_GET['act'])) {
                 $chuc_nang = $_POST['chuc_nang'];
                 $so_canh = $_POST['so_canh'];
                 $toc_do = $_POST['toc_do'];
-                
-                // Lấy giá trị từ checkbox
+
                 $new_arrival = isset($_POST['new_arrival']) ? 1 : 0;
                 $featured = isset($_POST['featured']) ? 1 : 0;
                 $best_seller = isset($_POST['best_seller']) ? 1 : 0;
 
                 $images = array();
-                if(isset($_FILES['imgs'])) {
+                if (isset($_FILES['imgs'])) {
                     $file_count = count($_FILES['imgs']['name']);
-                    for($i = 0; $i < $file_count; $i++) {
-                        if($_FILES['imgs']['error'][$i] == 0) {
+                    for ($i = 0; $i < $file_count; $i++) {
+                        if ($_FILES['imgs']['error'][$i] == 0) {
                             $target_dir = "../upload/";
                             $target_file = $target_dir . basename($_FILES["imgs"]["name"][$i]);
-                            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+                            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
                             $newFileName = uniqid() . '.' . $imageFileType;
                             $target_file = $target_dir . $newFileName;
                             if (move_uploaded_file($_FILES["imgs"]["tmp_name"][$i], $target_file)) {
                                 $images[] = $target_file;
+                            } else {
+                                $_SESSION['error'] = "Unable to move the uploaded file: " . htmlspecialchars($_FILES['imgs']['name'][$i]);
                             }
+                        } else {
+                            $_SESSION['error'] = "File upload error: " . $_FILES['imgs']['error'][$i];
                         }
                     }
                 }
-                
                 $images_json = !empty($images) ? json_encode($images) : "";
-                
-               
+
                 update_product($id, $ten_sp, $gia, $so_luong_hang, $mo_ta_sp, $id_danh_muc, $cong_suat, $cong_nghe, $chat_lieu, $chuc_nang, $so_canh, $toc_do, $images_json, $new_arrival, $featured, $best_seller);
                 header("Location: index.php?act=san_pham");
                 $_SESSION['success'] = "Product update successful!";
-                header("Location: index.php?act=san_pham");
-                exit();
+                exit(); // Dừng thực thi để tránh gửi thêm thông báo
             }
             break;
 

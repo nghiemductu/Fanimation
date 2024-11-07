@@ -103,9 +103,9 @@ $orders = $conn->query("
                     const order = result.order;
                     const products = result.products;
 
-                    let productListHtml = '<h5>Danh sách sản phẩm</h5><ul>';
+                    let productListHtml = '<h5>Product list</h5><ul>';
                     products.forEach(product => {
-                        productListHtml += `<li>${product.ten_sp} - Số lượng: ${product.so_luong} - Giá: ${new Intl.NumberFormat().format(product.gia)}$</li>`;
+                        productListHtml += `<li>${product.ten_sp} - Quantity: ${product.so_luong} - Price: ${new Intl.NumberFormat().format(product.gia)}$</li>`;
                     });
                     productListHtml += '</ul>';
 

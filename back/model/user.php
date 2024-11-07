@@ -2,12 +2,19 @@
 function add_user($username, $password, $email) {
     $conn = connect_db();
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO user (user_name, password, email, role, hien_thi_user) VALUES (:username, :password, :email, 1, 1)";
+    $sql = "INSERT INTO user (user_name, password, email, role, hien_thi_user) VALUES (:username, :password, :email, 0, 1)"; // Ensure role is 0
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':username', $username);
     $stmt->bindParam(':password', $hashed_password);
     $stmt->bindParam(':email', $email);
-    return $stmt->execute();
+    
+    if ($stmt->execute()) {
+        return true;
+    } else {
+        // Log error information
+        error_log("Error adding user: " . implode(", ", $stmt->errorInfo()));
+        return false;
+    }
 }
 
 function get_all_users() {
@@ -43,14 +50,14 @@ function restore_user($id) {
 }
 
 
-// Hàm thêm vào để test gửi bình luận lên db
-function get_user_by_username($username) {
-    $conn = connect_db();
-    $sql = "SELECT * FROM user WHERE user_name = :username";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':username', $username, PDO::PARAM_STR);
-    $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $result ? $result : false;
-}
+// // Hàm thêm vào để test gửi bình luận lên db
+// function get_user_by_username($username) {
+//     $conn = connect_db();
+//     $sql = "SELECT * FROM user WHERE user_name = :username";
+//     $stmt = $conn->prepare($sql);
+//     $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+//     $stmt->execute();
+//     $result = $stmt->fetch(PDO::FETCH_ASSOC);
+//     return $result ? $result : false;
+// }
 ?>

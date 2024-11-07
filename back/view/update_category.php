@@ -22,10 +22,10 @@
             <div class="col-md-2 mb-3">
                 <label for="parent_id" class="form-label">Parent category</label>
                 <select class="form-control" id="parent_id" name="parent_id">
-                    <option value="0">Danh mục gốc</option>
+                    <option value="0">Original catalog</option>
                     <?php
                     foreach ($kq as $category) {
-                        // Đảm bảo không chọn danh mục hiện tại làm cha của chính nó
+                       
                         if ($category['id'] != $dm['id']) {
                             echo '<option value="'.$category['id'].'" '.($category['id'] == $dm['parent_id'] ? 'selected' : '').'>'.$category['ten_danh_muc'].'</option>';
                         }

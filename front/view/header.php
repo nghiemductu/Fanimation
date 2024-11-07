@@ -15,7 +15,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
                 <!-- Logo -->
-                <a class="navbar-brand" href="index.php">
+                <a class="navbar-brand" href="http://localhost/fanimation/front/index.php">
                     <img src="http://localhost/fanimation/img/logo_fanimation.png" alt="Logo" class="img-fluid" style="max-height: 150px;">
                 </a>
 
@@ -26,35 +26,8 @@
                 </button>
 
                 <!-- Navbar Menu Items (will collapse into burger menu) -->
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <?php
-                        // Kiểm tra xem biến $categories có được định nghĩa không
-                        if (!isset($categories) || !is_array($categories)) {
-                            $categories = []; // Khởi tạo là mảng rỗng nếu không có
-                        }
-                        ?>
-                        <?php foreach ($categories as $category): ?>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    <?php echo htmlspecialchars($category['ten_danh_muc']); ?>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <?php if (!empty($category['children'])): ?>
-                                        <?php foreach ($category['children'] as $child): ?>
-                                            <li>
-                                                <a class="dropdown-item"
-                                                    href="http://localhost/fanimation/front/view/category_products.php?category_id=<?php echo $child['id']; ?>">
-                                                    <?php echo htmlspecialchars($child['ten_danh_muc']); ?>
-                                                </a>
-                                            </li>
-                                        <?php endforeach; ?>
-                                    <?php endif; ?>
-                                </ul>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
+                <div class="collapse navbar-collapse" id="navbarNav" style="justify-content: end;">
+                    
 
                     <!-- Search Form -->
                     <form class="d-flex" action="http://localhost/fanimation/front/view/search.php" method="GET">
@@ -92,6 +65,34 @@
                 </div>
             </div>
         </nav>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <?php
+                        // Kiểm tra xem biến $categories có được định nghĩa không
+                        if (!isset($categories) || !is_array($categories)) {
+                            $categories = []; // Khởi tạo là mảng rỗng nếu không có
+                        }
+                        ?>
+                        <?php foreach ($categories as $category): ?>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <?php echo htmlspecialchars($category['ten_danh_muc']); ?>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <?php if (!empty($category['children'])): ?>
+                                        <?php foreach ($category['children'] as $child): ?>
+                                            <li>
+                                                <a class="dropdown-item"
+                                                    href="http://localhost/fanimation/front/view/category_products.php?category_id=<?php echo $child['id']; ?>">
+                                                    <?php echo htmlspecialchars($child['ten_danh_muc']); ?>
+                                                </a>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </ul>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
     </div>
 
     <script>

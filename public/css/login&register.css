@@ -49,7 +49,7 @@ body {
     border-radius: 15px 0 0 15px;
 }
 .right {
-    background: url("http://localhost/Project/img/logo_fanimation.png") no-repeat center center;
+    background: url("http://localhost/fanimation/img/logo_fanimation.png") no-repeat center center;
     background-size: cover;
     border-radius: 0 15px 15px 0;
     display: flex;

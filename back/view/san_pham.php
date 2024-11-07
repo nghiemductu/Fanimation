@@ -93,7 +93,7 @@
         <?php
         // Giả sử $kq chứa danh sách sản phẩm từ cơ sở dữ liệu
         if(isset($kq) && count($kq) > 0){
-            $start_index = ($current_page - 1) * $items_per_page;
+            $start_index = ($current_page - 1) * $limit;
             foreach ($kq as $index => $item){
                 $stt = $start_index + $index + 1;
                 $ten_danh_muc = '';
@@ -116,7 +116,7 @@
                         <td class="align-middle">'.$item['ten_sp'].'</td>
                         <td class="align-middle">
                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#imageModal'.$item['id'].'">
-                                Xem ảnh
+                                See photos
                             </button>
                         </td>
                         <td class="align-middle">'.$ten_danh_muc.'</td>
@@ -125,7 +125,7 @@
                         <td class="align-middle">'.substr($item['mo_ta_sp'], 0, 50).'...</td>
                         <td class="align-middle">
                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#specModal'.$item['id'].'">
-                                Xem chi tiết
+                                See details
                             </button>
                         </td>
                         <td class="align-middle">'.$item['ngay_dang'].'</td>
@@ -152,19 +152,19 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="specModalLabel'.$item['id'].'">Thông số kỹ thuật: '.$item['ten_sp'].'</h5>
+                                <h5 class="modal-title" id="specModalLabel'.$item['id'].'">Technical specifications: '.$item['ten_sp'].'</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
                                 <table class="table table-bordered">
-                                    <tr><th>Công suất</th><td>'.$item['cong_suat'].'</td></tr>
-                                    <tr><th>Công nghệ</th><td>'.$item['cong_nghe'].'</td></tr>
-                                    <tr><th>Chất liệu</th><td>'.$item['chat_lieu'].'</td></tr>
-                                    <tr><th>Chức năng</th><td>'.$item['chuc_nang'].'</td></tr>
-                                    <tr><th>Số cánh</th><td>'.$item['so_canh'].'</td></tr>
-                                    <tr><th>Tốc độ</th><td>'.$item['toc_do'].'</td></tr>
+                                    <tr><th>Capacity</th><td>'.$item['cong_suat'].'</td></tr>
+                                    <tr><th>Technology</th><td>'.$item['cong_nghe'].'</td></tr>
+                                    <tr><th>Material</th><td>'.$item['chat_lieu'].'</td></tr>
+                                    <tr><th>Function</th><td>'.$item['chuc_nang'].'</td></tr>
+                                    <tr><th>Number of wings</th><td>'.$item['so_canh'].'</td></tr>
+                                    <tr><th>Speed</th><td>'.$item['toc_do'].'</td></tr>
                                 </table>
                             </div>
                         </div>
@@ -177,7 +177,7 @@
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="imageModalLabel'.$item['id'].'">Hình ảnh: '.$item['ten_sp'].'</h5>
+                                <h5 class="modal-title" id="imageModalLabel'.$item['id'].'">Images: '.$item['ten_sp'].'</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -185,11 +185,11 @@
                             <div class="modal-body">
                                 <div id="imageCarousel'.$item['id'].'" class="carousel slide" data-ride="carousel">
                                     <div class="carousel-inner">';
-                                    if (is_array($images)) {
-                                        foreach($images as $index => $image) {
-                                            echo '<div class="carousel-item '.($index == 0 ? 'active' : '').'">
-                                                    <img src="'.$image.'" class="d-block w-100" alt="'.$item['ten_sp'].'">
-                                                  </div>';
+                                        if (is_array($images)) {
+                                            foreach($images as $index => $image) {
+                                                echo '<div class="carousel-item '.($index == 0 ? 'active' : '').'">
+                                                        <img src="'.$image.'" class="d-block w-100" alt="'.$item['ten_sp'].'">
+                                                    </div>';
                                         }
                                     } else {
                                         echo '<div class="carousel-item active">

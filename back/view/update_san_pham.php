@@ -23,7 +23,7 @@
             <div class="col-md-2 mb-3">
                 <label for="id_dm" class="form-label">Categpry</label>
                 <select class="form-control" id="id_dm" name="id_dm" required>
-                    <option value="">Chọn danh mục</option>
+                    <option value="">Select category</option>
                     <?php foreach ($dsdm as $dm): ?>
                         <option value="<?php echo htmlspecialchars($dm['id']); ?>" <?php if ($dm['id'] == $sp['id_danh_muc']) echo 'selected'; ?>>
                             <?php echo htmlspecialchars($dm['ten_danh_muc']); ?>
@@ -87,14 +87,14 @@
                 </div>
                 <div class="d-flex flex-wrap justify-content-center">
                     <?php 
-                    $images = json_decode($sp['images'], true);
-                    if (is_array($images)): 
-                        foreach ($images as $image):
+                        $images = json_decode($sp['images'], true);
+                        if (is_array($images)): 
+                            foreach ($images as $image):
                     ?>
                         <img src="<?php echo htmlspecialchars($image); ?>" alt="Current Image" class="img-thumbnail m-1" style="max-width: 300px; max-height: 200px;">
                     <?php 
                         endforeach;
-                    elseif (!empty($sp['images'])): 
+                        elseif (!empty($sp['images'])): 
                     ?>
                         <img src="<?php echo htmlspecialchars($sp['images']); ?>" alt="Current Image" class="img-thumbnail m-1" style="max-width: 300px; max-height: 200px;">
                     <?php endif; ?>

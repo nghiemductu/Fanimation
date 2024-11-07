@@ -34,7 +34,7 @@ function confirmHide(url) {
 }
 
 function confirmRestore(url) {
-    if (confirm("Are you sure you want to restore this comment?")) {
+    if (confirm("Are you sure you want to restore this data?")) {
         window.location.href = url;
     }
 }

@@ -17,12 +17,12 @@
                 <select class="form-control" name="parent_id">
                     <option value="0">Original catalog</option>
                     <?php
-                    function buildCategoryOptions($categories, $parent_id = 0, $level = 0) {
+                    function buildCategoryOptions($categories, $parent_id = 0) {
                         $result = '';
                         foreach ($categories as $dm) {
                             if ($dm['parent_id'] == $parent_id) {
-                                $result .= '<option value="'.$dm['id'].'">'.str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $level).$dm['ten_danh_muc'].'</option>';
-                                $result .= buildCategoryOptions($categories, $dm['id'], $level + 1);
+                                $result .= '<option value="'.$dm['id'].'">'.$dm['ten_danh_muc'].'</option>';
+                                $result .= buildCategoryOptions($categories, $dm['id']); // Gọi đệ quy
                             }
                         }
                         return $result;
@@ -48,12 +48,12 @@
             </thead>
             <tbody>
                 <?php
-                function displayCategories($categories, $parent_id = 0, $level = 0, &$stt = 1)
+                function displayCategories($categories, $parent_id = 0, &$stt = 1)
                 {
                     foreach ($categories as $dm) {
                         if ($dm['parent_id'] == $parent_id) {
-                            $bg_class = $level == 0 ? 'table-primary' : '';
-                            $padding_left = 40 * $level; // 15px padding for each level
+                            $bg_class = $parent_id == 0 ? 'table-primary' : ''; 
+                            $padding_left = $dm['parent_id'] == 0 ? 0 : 50; 
                             echo '<tr class="' . $bg_class . '">
                                     <td class="text-center align-middle">' . $stt++ . '</td>
                                     <td class="text-center align-middle">
@@ -66,12 +66,12 @@
                                         <a href="#" class="btn btn-sm btn-danger" onclick="confirmDelete(function() { window.location.href=\'index.php?act=delete_category&id=' . $dm['id'] . '\'; })">Hidden</a>
                                     </td>
                                   </tr>';
-                            displayCategories($categories, $dm['id'], $level + 1, $stt);
+                            displayCategories($categories, $dm['id'], $stt); // Gọi đệ quy để hiển thị danh mục con
                         }
                     }
                 }
                 $stt = 1;
-                displayCategories($kq, 0, 0, $stt);
+                displayCategories($kq, 0, $stt);
                 ?>
             </tbody>
         </table>

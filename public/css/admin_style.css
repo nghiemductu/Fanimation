@@ -1,5 +1,5 @@
- /* Font và nền chính */
- body, .navbar {
+/* Font và nền chính */
+body, .navbar {
     font-family: 'Quicksand', sans-serif;
     background-color: #f0f9ff;
     color: #333;
@@ -20,13 +20,13 @@
     font-size: 1.5rem;
     color: rgba(255, 255, 255, 0.4);
     position: absolute;
-    animation: spin 10s linear infinite;
+    animation: spin 3s linear infinite;
     opacity: 0.9;
 }
 .fan-icon-1 { top: 15%; left: 10%; }
-.fan-icon-2 { top: 30%; right: 15%; animation-duration: 12s; }
-.fan-icon-3 { bottom: 20%; left: 20%; animation-duration: 8s; }
-.fan-icon-4 { bottom: 25%; right: 20%; animation-duration: 6s; }
+.fan-icon-2 { top: 30%; right: 15%; animation-duration: 4s; }
+.fan-icon-3 { bottom: 20%; left: 20%; animation-duration: 5s; }
+.fan-icon-4 { bottom: 25%; right: 20%; animation-duration: 2s; }
 
 /* Hiệu ứng xoay */
 @keyframes spin {
@@ -88,10 +88,13 @@
     background: rgba(255, 255, 255, 0.25);
     color: #f0f9ff;
 }
+
+/* Footer */
 footer {
-flex-shrink: 0;
-padding: 20px;
-background-color: #a29bfe;
-display: flex;
-flex-direction: column;
+    flex-shrink: 0; /* Đảm bảo footer không bị thu nhỏ */
+    padding: 20px;
+    background: linear-gradient(135deg, #74b9ff, #a29bfe);
+    display: flex;
+    flex-direction: column; /* Sắp xếp các phần tử trong footer theo chiều dọc */
+    position: relative; /* Đặt vị trí tương đối cho footer */
 }

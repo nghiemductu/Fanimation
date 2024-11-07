@@ -47,13 +47,13 @@ foreach ($_SESSION['cart'] as $item) {
             : $default_image_path;
         ?>
 
-        <a href="index.php?act=pd_detail&product_id=<?php echo $item['id']; ?>">
+        <a href="http://localhost/fanimation/front/index.php?act=pd_detail&product_id=1<?php echo $item['id']; ?>">
             <img src="<?php echo $image_path; ?>" class="card-img-top" alt="<?php echo htmlspecialchars($item['name']); ?>" style="width: 100px; height: auto;">
         </a>
 
         <div class="ms-3">
             <h5><?php echo htmlspecialchars($item['name']); ?></h5>
-            <p>Giá: <?php echo number_format($item['price'], 0, ',', '.'); ?>$</p>
+            <p>Price:<?php echo number_format($item['price'], 0, ',', '.'); ?>$</p>
             <div class="quantity-control">
                 <button class="btn btn-secondary decrease-quantity" data-id="<?php echo $item['id']; ?>">-</button>
                 <input class="quantity" type="number" value="<?php echo $item['quantity']; ?>" style="width:100px">

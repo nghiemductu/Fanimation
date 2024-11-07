@@ -1,8 +1,8 @@
 <h1 class="mb-4 text-center pt-4">Add New User</h1>
 <div class="row justify-content-center">
     <div class="col-md-3">
-        <?php if (isset($error)): ?>
-            <div class="alert alert-danger"><?php echo $error; ?></div>
+        <?php if (isset($_SESSION['error'])): ?> <!-- Kiểm tra biến phiên error -->
+            <div class="alert alert-danger"><?php echo $_SESSION['error']; ?></div>
         <?php endif; ?>
 
         <?php if (isset($_SESSION['success'])): ?>
@@ -11,6 +11,7 @@
             </script>
             <?php unset($_SESSION['success']); ?>
         <?php endif; ?>
+
 
         <form action="index.php?act=them_nguoi_dung" method="POST" class="mb-5">
             <div class="form-group mb-3">
@@ -44,9 +45,10 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach($users as $index => $user): ?>
+       
+            <?php foreach($users as $stt => $user): ?>
             <tr>
-                <td class="text-center align-middle"><?php echo $index + 1; ?></td>
+                <td class="text-center align-middle"><?php echo $stt + 1; ?></td>
                 <td class="text-center align-middle"><?php echo htmlspecialchars($user['user_name']); ?></td>
                 <td class="text-center align-middle"><?php echo htmlspecialchars($user['email']); ?></td>
                 <td class="text-center align-middle">

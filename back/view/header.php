@@ -24,46 +24,46 @@
     </style>
 </head>
 <body>
-    <!-- Navbar với icon động và gradient -->
-    <nav class="navbar navbar-expand-lg">
-        <!-- Icon quạt xoay với tốc độ khác nhau -->
-        <i class="fas fa-fan fan-icon fan-icon-1"></i>
-        <i class="fas fa-fan fan-icon fan-icon-2"></i>
-        <i class="fas fa-fan fan-icon fan-icon-3"></i>
-        <i class="fas fa-fan fan-icon fan-icon-4"></i>
+    <div class="container-fluid d-flex flex-column min-vh-100"> <!-- Sử dụng container-fluid để đảm bảo chiều rộng 100% -->
+        <!-- Navbar với icon động và gradient -->
+        <nav class="navbar navbar-expand-lg">
+            <!-- Icon quạt xoay với tốc độ khác nhau -->
+            <i class="fas fa-fan fan-icon fan-icon-1"></i>
+            <i class="fas fa-fan fan-icon fan-icon-2"></i>
+            <i class="fas fa-fan fan-icon fan-icon-3"></i>
+            <i class="fas fa-fan fan-icon fan-icon-4"></i>
 
-        <div class="container-fluid">
-            <a class="navbar-brand" href="index.php">
-                <i class="fas fa-fan fa-spin"></i> Fanimation Admin
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php?act=danh_muc">Category</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php?act=san_pham">Product</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php?act=them_nguoi_dung">User</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php?act=don_hang">Order</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php?act=hidden_items">Hidden item</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php?act=danh_gia_va_phan_hoi_khach_hang">Reviews and feedback</a>
-                </ul>
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.php">
+                    <i class="fas fa-fan fa-spin"></i> Fanimation Admin
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?act=danh_muc">Category</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?act=san_pham">Product</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?act=them_nguoi_dung">User</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?act=don_hang">Order</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?act=hidden_items">Hidden items</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?act=danh_gia_va_phan_hoi_khach_hang">Reviews and feedback</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-    <!-- Link Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+        <!-- Link Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
